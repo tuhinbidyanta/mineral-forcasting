@@ -6,7 +6,13 @@ import numpy as np
 from domestic import domestic_page,hybrid
 
 ### Copper Data Load
+st.set_page_config(
+    page_title="Mineral Forecasting Dashboard",
+    layout="wide"
+)
 st.title("🔶 Team Critical Thinker")
+
+
 st.subheader("Domestic Data production and foreign trade")
 copper = pd.read_excel("./mineral_data.xlsx",sheet_name="Copper")
 years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
@@ -15,10 +21,6 @@ copper['Year'] = years
 # --------------------------------
 # PAGE CONFIG
 # --------------------------------
-st.set_page_config(
-    page_title="Mineral Forecasting Dashboard",
-    layout="wide"
-)
 
 # Dash Board Secction
 st.markdown("Domestic Data production and foreign trade of Copper in India")
@@ -241,6 +243,7 @@ fig.add_scatter(
 )
 
 fig.update_layout(height=450, showlegend=True)
+fig.update_yaxes(title_text = "Export Million Dollar")
 
 fig2 = go.Figure()
 # Plot historical Export data
@@ -272,6 +275,7 @@ fig2.add_scatter(
 )
 
 fig2.update_layout(height=450, showlegend=True)
+fig2.update_yaxes(title_text = "Import Million Dollar")
 col1,col2 = st.columns(2)
 with col1:
     st.plotly_chart(fig, width='stretch')
@@ -280,8 +284,80 @@ with col2:
 
 
 
+st.subheader("Country Wise Import Export Data  and Dependency Analysis")
+c_data_import = pd.read_excel("./countrywise_import_export_data.xlsx",sheet_name="Import")
+c_data_export = pd.read_excel("./countrywise_import_export_data.xlsx",sheet_name="Export")
+# st.dataframe(c_data)
+# miner = eval(
+# c_data['minerals'].values[0],
+# {"array": np.array, "object": object, "__builtins__": {}}
+# )
+# st.write()
 
+miner  = st.selectbox("Select Mineral",c_data_export['minerals'].unique(),key="country_mineral")
+year_country = st.selectbox("Select Year Count for Forecast",range(2017,2026),key="year_count_country")
+# st.dataframe(c_data_import['minerals']==miner)
+def country_page(df,mineral):
+    data_mineral = df[df["minerals"] == mineral]
+    country = eval(
+        data_mineral['countries'].values[0],
+        {"array": np.array, "object": object, "__builtins__": {}}
+        )
+    usmillion = eval(
+        data_mineral['usmillion'].values[0],
+        {"array": np.array, "object": object, "__builtins__": {}}
+        )
+    volume = eval(
+        data_mineral['volume'].values[0],
+        {"array": np.array, "object": object, "__builtins__": {}}
+        )
+    return country,usmillion,volume
+# st.dataframe(country_page(c_data_import,miner)[0])
+col1,col2 = st.columns(2)
+with col1:
+    fig1_ = go.Figure()
+    fig1_.add_bar(
+        x=country_page(c_data_import,miner)[0][year_country-2017],
+        y=country_page(c_data_import,miner)[1][year_country-2017],
+        name="Import US Million"
+    )
+    fig1_.update_layout(title_text=f"Country Wise Import Data of {miner} in {year_country}")
+    fig1_.update_yaxes(title_text = "Import US Million Dollar")   
+    st.plotly_chart(fig1_, width='stretch')
+with col2:
+    fig2_ = go.Figure()
+    fig2_.add_bar(
+        x=country_page(c_data_export,miner)[0][year_country-2017],
+        y=country_page(c_data_export,miner)[1][year_country-2017],
+        name="Export US Million"
+    )
+    fig2_.update_layout(title_text=f"Country Wise Export Data of {miner} in {year_country}")
+    fig2_.update_yaxes(title_text = "Export US Million Dollar")   
+    st.plotly_chart(fig2_, width='stretch')
+col1,col2 = st.columns(2)
+with col1:
+    fig3_ = go.Figure()
+    fig3_.add_bar(
+        x=country_page(c_data_import,miner)[0][year_country-2017],
+        y=country_page(c_data_import,miner)[2][year_country-2017],
+        name="Import Volume"
+    )
+    fig3_.update_layout(title_text=f"Country Wise Import Volume Data of {miner} in {year_country}")
+    fig3_.update_yaxes(title_text = "Import Volume")   
+    st.plotly_chart(fig3_, width='stretch')
+with col2:
+    fig4_ = go.Figure()
+    fig4_.add_bar(
+        x=country_page(c_data_export,miner)[0][year_country-2017],
+        y=country_page(c_data_export,miner)[2][year_country-2017],
+        name="Export Volume"
+    )
+    fig4_.update_layout(title_text=f"Country Wise Export Volume Data of {miner} in {year_country}")
+    fig4_.update_yaxes(title_text = "Export Volume")   
+    st.plotly_chart(fig4_, width='stretch')
 
+st.markdown(f'#### The maximum Export of {miner} is from {country_page(c_data_export,miner)[0][year_country-2017][np.argmax(country_page(c_data_export,miner)[1][year_country-2017])]}')
+st.markdown(f'#### The maximum Import of {miner} is from {country_page(c_data_import,miner)[0][year_country-2017][np.argmax(country_page(c_data_import,miner)[1][year_country-2017])]}')
 
 # --------------------------------
 # LOAD DATA (REPLACE WITH YOUR NOTEBOOK CODE)

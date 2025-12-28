@@ -59,7 +59,7 @@ def domestic_page(df,state ,year = 2017):
     # fig.update_yaxes(title_text="Quantity", row=1, col=1)
     # fig.update_yaxes(title_text="Quantity", row=1, col=2)
     # fig.update_layout(height=450, showlegend=False)
-    fig1.update_yaxes(title_text = "Quantity")
+    fig1.update_yaxes(title_text = "Amount in Million Dollar")
     fig2.update_yaxes(title_text = "Quantity")
     fig1.update_layout(height=450, showlegend=False)
     fig2.update_layout(height=450, showlegend=False)
@@ -163,8 +163,8 @@ def hybrid(series,step = 2):
     import_series = series['Import'].values
 
 # Example: forecast for the first mineral (index 0)
-    export_pred = hybrid_arima_lstm(export_series[0], steps=2)
-    import_pred = hybrid_arima_lstm(import_series[0], steps=2)
+    export_pred = hybrid_arima_lstm(export_series[0], steps=step)
+    import_pred = hybrid_arima_lstm(import_series[0], steps=step)
 # print("Next 2-year Export Forecast:", export_pred)
 # print("Next 2-year Import Forecast:", import_pred)
     return export_pred,import_pred
