@@ -13,7 +13,7 @@ st.set_page_config(
 st.title("🔶 Team Critical Thinker")
 
 
-st.subheader("Domestic Data production and foreign trade")
+st.subheader("Domestic production Data and foreign trade")
 copper = pd.read_excel("./mineral_data.xlsx",sheet_name="Copper")
 years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
 copper['Year'] = years
@@ -63,7 +63,7 @@ with col3:
 tin = pd.read_excel("./mineral_data.xlsx",sheet_name="Tin")
 years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
 tin['Year'] = years
-st.markdown("Domestic Data production and foreign trade of Tin in India")
+st.markdown("Domestic production Data and foreign trade of Tin in India")
 col1, col2 = st.columns(2)
 with col1:
     option_tin = st.selectbox(
@@ -101,7 +101,7 @@ with col3:
 graphite = pd.read_excel("./mineral_data.xlsx",sheet_name="Graphite")
 years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
 graphite['Year'] = years
-st.markdown("Domestic Data production and foreign trade of Graphite in India")
+st.markdown("Domestic production Data and foreign trade of Graphite in India")
 col1, col2 = st.columns(2)
 with col1:
     option_g = st.selectbox(
@@ -139,7 +139,7 @@ with col3:
 phosphorus = pd.read_excel("./mineral_data.xlsx",sheet_name="Phosphorus")
 # years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
 phosphorus['Year'] = years
-st.markdown("Domestic Data production and foreign trade of Phosphorus in India")
+st.markdown("Domestic production Data and foreign trade of Phosphorus in India")
 col1, col2 = st.columns(2)
 with col1:
     option_p = st.selectbox(
