@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 import numpy as np
+import time
 from domestic import domestic_page,hybrid
 
 ### Copper Data Load
@@ -15,7 +16,10 @@ st.title("🔶 Team Critical Thinker")
 if st.button("Clear All Caches"):
     st.cache_data.clear()
     st.cache_resource.clear()
-    st.write("All caches cleared!")
+    with st.spinner("Clearing caches... Please wait."):
+        time.sleep(3)
+    # st.write("All caches cleared!")
+    # time.sleep(5)
     
 st.subheader("Domestic production Data and foreign trade")
 copper = pd.read_excel("./mineral_data.xlsx",sheet_name="Copper")
