@@ -23,7 +23,7 @@ copper['Year'] = years
 # --------------------------------
 
 # Dash Board Secction
-st.markdown("Domestic Data production and foreign trade of Copper in India")
+st.markdown("Domestic production Data and foreign trade of Copper in India")
 col1, col2 = st.columns(2)
 with col1:
     option = st.selectbox(
