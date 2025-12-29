@@ -60,7 +60,7 @@ def domestic_page(df,state ,year = 2017):
     # fig.update_yaxes(title_text="Quantity", row=1, col=2)
     # fig.update_layout(height=450, showlegend=False)
     fig1.update_yaxes(title_text = "Amount in Million Dollar")
-    fig2.update_yaxes(title_text = "Quantity")
+    fig2.update_yaxes(title_text = "Indian Rupee")
     fig1.update_layout(height=450, showlegend=False)
     fig2.update_layout(height=450, showlegend=False)
 
@@ -79,7 +79,7 @@ def domestic_page(df,state ,year = 2017):
     )
     fig3.update_layout(
         title=f"Monthly Production in {state} for {year}",
-        yaxis_title="Quantity",
+        yaxis_title="Indian Rupee",
         height=450,
     )
     
