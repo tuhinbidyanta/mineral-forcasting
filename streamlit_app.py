@@ -295,7 +295,7 @@ c_data_export = pd.read_excel("./countrywise_import_export_data.xlsx",sheet_name
 # st.write()
 
 miner  = st.selectbox("Select Mineral",c_data_export['minerals'].unique(),key="country_mineral")
-year_country = st.selectbox("Select Year Count for Forecast",range(2017,2026),key="year_count_country")
+year_country = st.selectbox("Select Year",range(2017,2026),key="year_count_country")
 # st.dataframe(c_data_import['minerals']==miner)
 def country_page(df,mineral):
     data_mineral = df[df["minerals"] == mineral]
