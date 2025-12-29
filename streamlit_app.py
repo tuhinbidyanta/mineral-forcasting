@@ -12,7 +12,11 @@ st.set_page_config(
 )
 st.title("🔶 Team Critical Thinker")
 
-
+if st.button("Clear All Caches"):
+    st.cache_data.clear()
+    st.cache_resource.clear()
+    st.write("All caches cleared!")
+    
 st.subheader("Domestic production Data and foreign trade")
 copper = pd.read_excel("./mineral_data.xlsx",sheet_name="Copper")
 years  = [2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025]
